@@ -35,7 +35,7 @@ namespace testovoeXML2.Repositories
 						Parameters =
 						{
 							new("@productName",product.name),
-							new("@productPrice",product.price),
+							new("@productPrice",decimal.Parse($@"{product.price}",CultureInfo.InvariantCulture)),
 							new("@productManufacturerId",1),
 							new("@categoryId",1)
 						}

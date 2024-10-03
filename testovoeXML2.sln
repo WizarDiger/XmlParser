@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testovoeXML2", "testovoeXML2\testovoeXML2.csproj", "{B74CA309-4CE6-4635-AEA2-035C8D45F029}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "testovoeXML2", "testovoeXML2\testovoeXML2.csproj", "{B74CA309-4CE6-4635-AEA2-035C8D45F029}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testovoeXML2.Tests", "testovoeXML2.Tests\testovoeXML2.Tests.csproj", "{A242C6B6-4E0B-4D35-97E8-DF474046F7FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B74CA309-4CE6-4635-AEA2-035C8D45F029}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B74CA309-4CE6-4635-AEA2-035C8D45F029}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B74CA309-4CE6-4635-AEA2-035C8D45F029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A242C6B6-4E0B-4D35-97E8-DF474046F7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A242C6B6-4E0B-4D35-97E8-DF474046F7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A242C6B6-4E0B-4D35-97E8-DF474046F7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A242C6B6-4E0B-4D35-97E8-DF474046F7FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

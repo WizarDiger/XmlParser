@@ -24,7 +24,7 @@ namespace testovoeXML2.Repositories
 					Parameters =
 					{
 						new("@userId",Int32.Parse(userId)),
-						new("@orderRegDate",order.reg_date),
+						new("@orderRegDate",DateTime.Parse(order.reg_date)),
 						new("@orderSum",decimal.Parse($@"{order.sum}",CultureInfo.InvariantCulture)),
 						new("@orderNo", Int32.Parse(order.no))
 					}
@@ -37,10 +37,10 @@ namespace testovoeXML2.Repositories
 				{
 					Parameters =
 					{
-						new("@orderNo",order.no),
-						new("@userId",userId),
-						new("@orderRegDate",order.reg_date),
-						new("@orderSum",order.sum)
+						new("@orderNo",Int32.Parse(order.no)),
+						new("@userId",Int32.Parse(userId)),
+						new("@orderRegDate",DateTime.Parse(order.reg_date)),
+						new("@orderSum",decimal.Parse($@"{order.sum}",CultureInfo.InvariantCulture))
 					}
 				};
 				command.ExecuteNonQuery();		
@@ -54,7 +54,7 @@ namespace testovoeXML2.Repositories
 			{
 				Parameters =
 				{
-					new("@no",no)
+					new("@no",Int32.Parse(no))
 				}
 			};
 			{

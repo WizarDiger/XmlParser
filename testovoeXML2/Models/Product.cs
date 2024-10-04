@@ -9,8 +9,11 @@ namespace testovoeXML2.Models
 {
 	public class Product
 	{
-		public string quantity { get; set; }
-		public string name { get; set; }
-		public string price { get; set; }
+		[XmlElement("quantity")]
+		public string Quantity { get; set; }
+		[XmlElement("name")]
+		public string Name { get; set; }
+		[XmlElement("price")]
+		public string Price { get; set; }
 	}
 }

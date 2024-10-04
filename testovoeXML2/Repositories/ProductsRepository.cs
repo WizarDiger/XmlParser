@@ -13,17 +13,17 @@ namespace testovoeXML2.Repositories
 	{
 		public void ProcessProducts(Order order, NpgsqlConnection conn, NpgsqlTransaction tx)
 		{
-			if (order == null || order.product== null) throw new Exception("Некорректные данные о товарах");
-			foreach (var product in order.product)
+			if (order == null || order.Product== null) throw new Exception("Некорректные данные о товарах");
+			foreach (var product in order.Product)
 			{
-				if (ProductExists(product.name, conn, tx))
+				if (ProductExists(product.Name, conn, tx))
 				{
 					using var command = new NpgsqlCommand($@"UPDATE ""Товары"" SET ""цена_товара""=@productPrice WHERE ""название_товара""=@productName", conn, tx)
 					{
 						Parameters =
 						{
-							new("@productPrice",decimal.Parse($@"{product.price}",CultureInfo.InvariantCulture)),
-							new("@productName",product.name)
+							new("@productPrice",decimal.Parse($@"{product.Price}",CultureInfo.InvariantCulture)),
+							new("@productName",product.Name)
 						}
 					};
 						command.ExecuteNonQuery();
@@ -34,8 +34,8 @@ namespace testovoeXML2.Repositories
 					{
 						Parameters =
 						{
-							new("@productName",product.name),
-							new("@productPrice",decimal.Parse($@"{product.price}",CultureInfo.InvariantCulture)),
+							new("@productName",product.Name),
+							new("@productPrice",decimal.Parse($@"{product.Price}",CultureInfo.InvariantCulture)),
 							new("@productManufacturerId",1),
 							new("@categoryId",1)
 						}

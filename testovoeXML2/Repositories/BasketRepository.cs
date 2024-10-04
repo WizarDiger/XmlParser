@@ -15,27 +15,27 @@ namespace testovoeXML2.Repositories
 	{
 		public void ProcessBasket(Order order, NpgsqlConnection conn, NpgsqlTransaction tx)
 		{
-			if (order == null || order.product == null || order.reg_date == null || order.user == null || order.sum == null) throw new Exception("Некорректные данные о продажах");
+			if (order == null || order.Product == null || order.RegistrationDate == null || order.User == null || order.Sum == null) throw new Exception("Некорректные данные о продажах");
 
 			using var deleteBasketCommand = new NpgsqlCommand($@"DELETE FROM ""Корзина"" WHERE ""заказ_id""=@orderNo", conn, tx)
 			{
 				Parameters =
 				{
-					new("@orderNo", Int32.Parse(order.no))
+					new("@orderNo", Int32.Parse(order.Number))
 				}
 			};
 			deleteBasketCommand.ExecuteNonQuery();
 
-			foreach (var product in order.product)
+			foreach (var product in order.Product)
 			{
-				if (ProductExists(product.name,conn, tx))
+				if (ProductExists(product.Name,conn, tx))
 				{
 					using var command = new NpgsqlCommand($@"UPDATE ""Товары"" SET ""цена_товара""=@productPrice WHERE ""название_товара""=@productName", conn, tx)
 					{
 						Parameters =
 						{
-							new("@productPrice",decimal.Parse($@"{product.price}",CultureInfo.InvariantCulture)),
-							new("@productName",product.name)
+							new("@productPrice",decimal.Parse($@"{product.Price}",CultureInfo.InvariantCulture)),
+							new("@productName",product.Name)
 						}
 					};
                     command.ExecuteNonQuery();
@@ -46,22 +46,22 @@ namespace testovoeXML2.Repositories
 					{
 						Parameters =
 						{
-							new("@productName",product.name),
-							new("@productPrice",decimal.Parse($@"{product.price}",CultureInfo.InvariantCulture)),
+							new("@productName",product.Name),
+							new("@productPrice",decimal.Parse($@"{product.Price}",CultureInfo.InvariantCulture)),
 							new("@productManufacturerId",1),
 							new("@categoryId",1)
 						}
 					};
 					command.ExecuteNonQuery();
 				}
-				var productId = GetProductId(product.name,conn, tx);
+				var productId = GetProductId(product.Name,conn, tx);
 				using var insertIntoBasketCommand = new NpgsqlCommand($@"INSERT INTO ""Корзина"" (""заказ_id"",""товар_id"",""количество_товара"") VALUES (@orderNo,@productId,@productQuantity)", conn, tx)
 				{
 					Parameters =
 					{
-						new("@orderNo",Int32.Parse(order.no)),
+						new("@orderNo",Int32.Parse(order.Number)),
 						new("productId",Int32.Parse(productId)),
-						new("productQuantity",Int32.Parse(product.quantity))
+						new("productQuantity",Int32.Parse(product.Quantity))
 					}
 				};
                 insertIntoBasketCommand.ExecuteNonQuery();

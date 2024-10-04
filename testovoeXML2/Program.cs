@@ -11,8 +11,7 @@ using testovoeXML2;
 using testovoeXML2.Models;
 using testovoeXML2.Repositories;
 
-//var xml = XDocument.Load("g:\\myXML.xml");
-string path = "TestXmls\\myXML.xml";
+string path = "myXML.xml";
 var xmlProcesser = new XmlProcesser();
 var xmlParser = new XmlParser();
 var orders = xmlParser.ParseXml(path);

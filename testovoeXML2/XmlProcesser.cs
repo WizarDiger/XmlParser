@@ -19,12 +19,12 @@ namespace testovoeXML2
 			{
 				conn.Open();
 				using var tx = conn.BeginTransaction();
-				foreach (var order in orders.order)
+				foreach (var order in orders.Order)
 				{
 					try
 					{
 						UsersRepository usersRepository = new UsersRepository();
-						usersRepository.ProcessUserData(order.user, conn, tx);
+						usersRepository.ProcessUserData(order.User, conn, tx);
 
 						ProductsRepository productsRepository = new ProductsRepository();
 						productsRepository.ProcessProducts(order, conn, tx);

@@ -12,15 +12,15 @@ namespace testovoeXML2.Repositories
 	{
 		public void ProcessUserData(User user, NpgsqlConnection conn, NpgsqlTransaction tx)
 		{
-			if (user == null || user.email == null || user.fio == null) throw new Exception("Некорректные данные о пользователе");
-			if (UserExists(user.email, conn, tx))
+			if (user == null || user.Email == null || user.Fio == null) throw new Exception("Некорректные данные о пользователе");
+			if (UserExists(user.Email, conn, tx))
 			{
 				using var command = new NpgsqlCommand($@"UPDATE ""Пользователи"" SET ""имя_пользователя""=@userFio WHERE email_пользователя=@userEmail", conn, tx)
 				{
 					Parameters =
 					{
-						new("@userFio",user.fio),
-						new("@userEmail",user.email)
+						new("@userFio",user.Fio),
+						new("@userEmail",user.Email)
 					}
 				};
 					command.ExecuteNonQuery();
@@ -31,8 +31,8 @@ namespace testovoeXML2.Repositories
 				{
 					Parameters =
 					{
-						new("@userFio",user.fio),
-						new("@userEmail",user.email)
+						new("@userFio",user.Fio),
+						new("@userEmail",user.Email)
 					}
 				};
 					command.ExecuteNonQuery();

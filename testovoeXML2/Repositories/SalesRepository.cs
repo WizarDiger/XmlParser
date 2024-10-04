@@ -15,18 +15,18 @@ namespace testovoeXML2.Repositories
 	{		
 		public void ProcessSales(Order order, NpgsqlConnection conn, NpgsqlTransaction tx)
 		{
-			if (order == null || order.product == null || order.reg_date == null || order.user == null || order.sum == null) throw new Exception("Некорректные данные о продажах");
-			var userId = GetUserId(order.user.email,conn,tx);
-			if (RecordExists(order.no,conn,tx))
+			if (order == null || order.Product == null || order.RegistrationDate == null || order.User == null || order.Sum == null) throw new Exception("Некорректные данные о продажах");
+			var userId = GetUserId(order.User.Email,conn,tx);
+			if (RecordExists(order.Number,conn,tx))
 			{
 				using var command = new NpgsqlCommand($@"UPDATE ""Покупки_товаров_пользователями"" SET ""пользователь_id""=@userId, ""дата_заказа""=@orderRegDate, ""цена_заказа""=@orderSum WHERE ""заказ_id""=@orderNo", conn, tx)
 				{
 					Parameters =
 					{
 						new("@userId",Int32.Parse(userId)),
-						new("@orderRegDate",DateTime.Parse(order.reg_date)),
-						new("@orderSum",decimal.Parse($@"{order.sum}",CultureInfo.InvariantCulture)),
-						new("@orderNo", Int32.Parse(order.no))
+						new("@orderRegDate",DateTime.Parse(order.RegistrationDate)),
+						new("@orderSum",decimal.Parse($@"{order.Sum}",CultureInfo.InvariantCulture)),
+						new("@orderNo", Int32.Parse(order.Number))
 					}
 				};
 				command.ExecuteNonQuery();			
@@ -37,10 +37,10 @@ namespace testovoeXML2.Repositories
 				{
 					Parameters =
 					{
-						new("@orderNo",Int32.Parse(order.no)),
+						new("@orderNo",Int32.Parse(order.Number)),
 						new("@userId",Int32.Parse(userId)),
-						new("@orderRegDate",DateTime.Parse(order.reg_date)),
-						new("@orderSum",decimal.Parse($@"{order.sum}",CultureInfo.InvariantCulture))
+						new("@orderRegDate",DateTime.Parse(order.RegistrationDate)),
+						new("@orderSum",decimal.Parse($@"{order.Sum}",CultureInfo.InvariantCulture))
 					}
 				};
 				command.ExecuteNonQuery();		

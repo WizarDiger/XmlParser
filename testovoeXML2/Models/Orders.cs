@@ -12,7 +12,7 @@ namespace testovoeXML2.Models
 	{
 
 		[XmlElement("order", typeof(Order))]
-		public Order[] order { get; set; }
+		public Order[] Order { get; set; }
 	}
 
 }

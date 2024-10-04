@@ -9,12 +9,16 @@ namespace testovoeXML2.Models
 {
 	public class Order
 	{
-		public string no { get; set; }
-		public string reg_date { get; set; }
-		public string sum { get; set; }
+		[XmlElement("no")]
+		public string Number { get; set; }
+		[XmlElement("reg_date")]
+		public string RegistrationDate { get; set; }
+		[XmlElement("sum")]
+		public string Sum { get; set; }
 	
 		[XmlElement("product", typeof(Product))]
-		public Product[] product { get; set; }
-		public User user { get; set; }
+		public Product[] Product { get; set; }
+		[XmlElement("user")]
+		public User User { get; set; }
 	}
 }

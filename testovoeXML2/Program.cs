@@ -6,16 +6,13 @@ using System.Runtime.Intrinsics.X86;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using testovoeXML2;
+using testovoeXML2.Interfaces;
 using testovoeXML2.Models;
 using testovoeXML2.Repositories;
 
-string path = "myXML.xml";
-var xmlProcesser = new XmlProcesser();
-var xmlParser = new XmlParser();
-var orders = xmlParser.ParseXml(path);
-xmlProcesser.ProcessXml(orders);
-
-
-
+var serviceProvider = new ServiceProviderFactory().Create();
+XmlManager? xmlManager = serviceProvider.GetRequiredService<XmlManager>();
+xmlManager?.InitializeParsing(serviceProvider);

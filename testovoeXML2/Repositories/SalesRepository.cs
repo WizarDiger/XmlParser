@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using testovoeXML2.Interfaces;
 using testovoeXML2.Models;
 
 namespace testovoeXML2.Repositories
 {
-	internal class SalesRepository
+	internal class SalesRepository:ISalesService
 	{		
 		public void ProcessSales(Order order, NpgsqlConnection conn, NpgsqlTransaction tx)
 		{

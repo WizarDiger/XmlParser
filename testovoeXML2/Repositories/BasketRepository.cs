@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using testovoeXML2.Interfaces;
 using testovoeXML2.Models;
 
 namespace testovoeXML2.Repositories
 {
-	internal class BasketRepository
+	internal class BasketRepository:IBasketService
 	{
 		public void ProcessBasket(Order order, NpgsqlConnection conn, NpgsqlTransaction tx)
 		{

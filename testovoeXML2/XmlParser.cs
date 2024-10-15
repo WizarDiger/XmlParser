@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using testovoeXML2.Interfaces;
 using testovoeXML2.Models;
 
 namespace testovoeXML2
 {
-	public class XmlParser
+	public class XmlParser:IParseXmlService
 	{
 		public Orders ParseXml(string filePath)
 		{

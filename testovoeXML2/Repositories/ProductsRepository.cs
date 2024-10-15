@@ -5,11 +5,12 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using testovoeXML2.Interfaces;
 using testovoeXML2.Models;
 
 namespace testovoeXML2.Repositories
 {
-	internal class ProductsRepository
+	internal class ProductsRepository:IProductsService
 	{
 		public void ProcessProducts(Order order, NpgsqlConnection conn, NpgsqlTransaction tx)
 		{

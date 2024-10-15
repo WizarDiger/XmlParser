@@ -1,20 +1,26 @@
-﻿using Npgsql;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using testovoeXML2.Interfaces;
 using testovoeXML2.Models;
 using testovoeXML2.Repositories;
 
 namespace testovoeXML2
 {
-	public class XmlProcesser
+	public class XmlProcesser:IProcessXmlService
 	{
 		string connString = "Server = localhost; Database = testovoe2; Port = 5432; Ssl Mode = allow; User Id = postgres; Password = ";
-		public void ProcessXml(Orders orders)
+		public void ProcessXml(Orders orders, ServiceProvider serviceProvider)
 		{
+			IBasketService? basketService = serviceProvider.GetRequiredService<IBasketService>();
+			IProductsService? productsService = serviceProvider.GetRequiredService<IProductsService>();
+			ISalesService? salesService = serviceProvider.GetRequiredService<ISalesService>();
+			IUsersService? usersService = serviceProvider.GetRequiredService<IUsersService>();
 			using (var conn = new NpgsqlConnection(connString))
 			{
 				conn.Open();
@@ -23,17 +29,10 @@ namespace testovoeXML2
 				{
 					try
 					{
-						UsersRepository usersRepository = new UsersRepository();
-						usersRepository.ProcessUserData(order.User, conn, tx);
-
-						ProductsRepository productsRepository = new ProductsRepository();
-						productsRepository.ProcessProducts(order, conn, tx);
-
-						SalesRepository salesRepository = new SalesRepository();
-						salesRepository.ProcessSales(order, conn, tx);
-
-						BasketRepository basketRepository = new BasketRepository();
-						basketRepository.ProcessBasket(order, conn, tx);
+						usersService.ProcessUserData(order.User, conn, tx);
+						productsService.ProcessProducts(order, conn, tx);
+						salesService.ProcessSales(order, conn, tx);
+						basketService.ProcessBasket(order, conn, tx);
 					}
 					catch
 					{
